@@ -28,11 +28,13 @@ public class Consumer {
 
         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
+        // 将方法名称与参数传到远端
         outputStream.writeUTF(interfaceName);
         outputStream.writeUTF(method.getName());
         outputStream.writeObject(method.getParameterTypes());
         outputStream.writeObject(arguments);
 
+        // 从远端读取方法执行结果
         ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
         Object result = inputStream.readObject();
 
