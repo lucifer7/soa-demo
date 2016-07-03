@@ -1,6 +1,7 @@
 package rpc.http2.consumer;
 
 import com.sun.xml.internal.fastinfoset.Encoder;
+import lombok.extern.log4j.Log4j;
 import rpc.http2.protocol.Encode;
 import rpc.http2.protocol.ProtocolUtil;
 import rpc.http2.protocol.Request;
@@ -18,6 +19,7 @@ import static util.ProjectConstants.HTTP_PORT;
 /**
  * Created by lucifer on 2016-7-3.
  */
+@Log4j
 public class HttpConsumer {
     private static final String COMMAND = "HELLO";
 
@@ -33,6 +35,9 @@ public class HttpConsumer {
         // 3. 处理响应数据
         InputStream input = client.getInputStream();
         Response response = ProtocolUtil.readResponse(input);
+
+        // 4. 读取响应内容
+        log.info(response.getResponse());
     }
 
 }

@@ -28,22 +28,13 @@ public class HttpProvider {
             Request request = ProtocolUtil.readRequest(input);
 
             // 2. 组装响应数据
-            Response response = buildResponse(request);
+            String responseStr = handleCommand(request);
+            Response response = new Response(Encode.UTF_8.getValue(), responseStr, responseStr.length());
 
             // 3. 返回响应数据
             OutputStream output = client.getOutputStream();
             ProtocolUtil.writeResponse(output, response);
         }
-    }
-
-    private Response buildResponse(Request request) {
-        Response response = new Response();
-        response.setEncode(Encode.UTF_8.getValue());
-
-        response.setResponse(handleCommand(request));
-
-        response.setResponseLength(response.getResponse().length());
-        return response;
     }
 
     private String handleCommand(Request request) {
