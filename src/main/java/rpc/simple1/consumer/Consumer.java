@@ -1,4 +1,4 @@
-package rpc.consumer;
+package rpc.simple1.consumer;
 
 import lombok.extern.log4j.Log4j;
 import rpc.service.SayHelloService;
@@ -8,6 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.net.Socket;
+
+import static util.ProjectConstants.HOST_ADDRESS;
+import static util.ProjectConstants.SIMPLE_PORT;
 
 /**
  * Created by lucifer
@@ -23,7 +26,7 @@ public class Consumer {
 
         Method method = SayHelloService.class.getMethod("sayHello", String.class);
 
-        Socket socket = new Socket("127.0.0.1", 1234);
+        Socket socket = new Socket(HOST_ADDRESS, SIMPLE_PORT);
 
         Object[] arguments = {"hello"};
 

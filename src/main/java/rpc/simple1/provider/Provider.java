@@ -1,8 +1,6 @@
-package rpc.provider;
+package rpc.simple1.provider;
 
 import lombok.extern.log4j.Log4j;
-import org.apache.log4j.net.SocketServer;
-import org.apache.log4j.or.ObjectRenderer;
 import util.ReflectUtil;
 
 import java.io.IOException;
@@ -12,6 +10,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import static util.ProjectConstants.SIMPLE_PORT;
 
 /**
  * Created by lucifer
@@ -23,7 +23,7 @@ public class Provider {
     // start provider first
     public void produce() throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
         log.info("Provider is running...");
-        ServerSocket serverSocket = new ServerSocket(1234);
+        ServerSocket serverSocket = new ServerSocket(SIMPLE_PORT);
 
         while (true) {
             Socket socket = serverSocket.accept();

@@ -1,4 +1,4 @@
-package rpc.consumer;
+package rpc.simple1.consumer;
 
 import java.io.IOException;
 
