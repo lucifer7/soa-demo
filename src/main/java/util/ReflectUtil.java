@@ -1,5 +1,6 @@
 package util;
 
+import com.google.common.collect.Lists;
 import lombok.extern.log4j.Log4j;
 import rpc.service.SayHelloService;
 
@@ -18,7 +19,7 @@ public class ReflectUtil {
     获取同一路径下的子类与实现类
      */
     public static List<Class<?>> getAllAssignedClass(Class<?> cls) throws ClassNotFoundException {
-        List<Class<?>> classList = new ArrayList<>();
+        List<Class<?>> classList = Lists.newArrayList();
         for (Class<?> clz : getClasses(cls)) {
             if (cls.isAssignableFrom(clz) && !cls.equals(clz)) {
                 classList.add(clz);
@@ -38,7 +39,7 @@ public class ReflectUtil {
     }
 
     private static List<Class<?>> getPackageClass(File file, String pkg) throws ClassNotFoundException {
-        List<Class<?>> classList = new ArrayList<>();
+        List<Class<?>> classList = Lists.newArrayList();
         if (!file.exists()) {
             return classList;
         }

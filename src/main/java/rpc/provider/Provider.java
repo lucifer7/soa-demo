@@ -1,10 +1,15 @@
 package rpc.provider;
 
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.net.SocketServer;
 import org.apache.log4j.or.ObjectRenderer;
+import util.ReflectUtil;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -13,8 +18,11 @@ import java.net.Socket;
  * Date: 2016-6-16.
  * Time: 22:55
  */
+@Log4j
 public class Provider {
-    public void produce() throws IOException, ClassNotFoundException {
+    // start provider first
+    public void produce() throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+        log.info("Provider is running...");
         ServerSocket serverSocket = new ServerSocket(1234);
 
         while (true) {
@@ -29,7 +37,14 @@ public class Provider {
 
             // invoke
             Class serviceInterfaceClz = Class.forName(interfaceName);
-            Object service = serviceInterfaceClz.getSigners();
+            String serviceName = ReflectUtil.getAllAssignedClass(serviceInterfaceClz).get(0).getName();
+            Object service = Class.forName(serviceName).newInstance();
+            Method method = serviceInterfaceClz.getMethod(methodName, parameterTypes);
+
+            Object result = method.invoke(service, arguments);
+
+            ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
+            output.writeObject(result);
         }
     }
 }

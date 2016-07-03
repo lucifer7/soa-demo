@@ -17,6 +17,7 @@ import java.net.Socket;
 @Log4j
 public class Consumer {
     public void consume() throws IOException, NoSuchMethodException, ClassNotFoundException {
+        log.info("Consumer is running...");
         // Name for service
         String interfaceName = SayHelloService.class.getName();
 
