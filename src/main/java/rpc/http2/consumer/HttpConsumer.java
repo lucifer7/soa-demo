@@ -1,6 +1,5 @@
 package rpc.http2.consumer;
 
-import com.sun.xml.internal.fastinfoset.Encoder;
 import lombok.extern.log4j.Log4j;
 import rpc.http2.protocol.Encode;
 import rpc.http2.protocol.ProtocolUtil;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.nio.charset.Charset;
 
 import static util.ProjectConstants.HOST_ADDRESS;
 import static util.ProjectConstants.HTTP_PORT;
@@ -21,11 +19,11 @@ import static util.ProjectConstants.HTTP_PORT;
  */
 @Log4j
 public class HttpConsumer {
-    private static final String COMMAND = "HELLO";
+    public void consume(String command) throws IOException {
+        log.info("Consumer executes on command: " + command);
 
-    public void consume() throws IOException {
         // 1. 初始化请求
-        Request request = new Request(Encode.UTF_8.getValue(), COMMAND, COMMAND.length());
+        Request request = new Request(Encode.UTF_8.getValue(), command, command.length());
         Socket client = new Socket(HOST_ADDRESS, HTTP_PORT);
 
         // 2. 发送请求

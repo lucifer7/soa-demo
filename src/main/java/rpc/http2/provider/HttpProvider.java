@@ -1,5 +1,6 @@
 package rpc.http2.provider;
 
+import lombok.extern.log4j.Log4j;
 import rpc.http2.protocol.Encode;
 import rpc.http2.protocol.ProtocolUtil;
 import rpc.http2.protocol.Request;
@@ -16,8 +17,10 @@ import static util.ProjectConstants.HTTP_PORT;
 /**
  * Created by lucifer on 2016-7-3.
  */
+@Log4j
 public class HttpProvider {
     public void produce() throws IOException {
+        log.info("Http provider server start...");
         ServerSocket server = new ServerSocket(HTTP_PORT);
 
         while (true) {
