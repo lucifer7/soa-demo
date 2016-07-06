@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/http-rpc/http-rpc.iml" filepath="$PROJECT_DIR$/http-rpc/http-rpc.iml" />
       <module fileurl="file://$PROJECT_DIR$/soa-demo.iml" filepath="$PROJECT_DIR$/soa-demo.iml" />
     </modules>
   </component>

@@ -22,10 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="soa-demo" />
+        <module name="http-rpc" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="http-rpc" target="1.5" />
       <module name="soa-demo" target="1.7" />
     </bytecodeTargetLevel>
   </component>
